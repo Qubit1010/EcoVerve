@@ -16,7 +16,6 @@ const addProduct = async (req, res) => {
       subCategory,
       sizes,
       bestseller,
-      date,
     } = req.body;
 
     const image1 = req.files.image1 && req.files.image1[0];
@@ -24,7 +23,9 @@ const addProduct = async (req, res) => {
     const image3 = req.files.image3 && req.files.image3[0];
     const image4 = req.files.image4 && req.files.image4[0];
 
-    const images = [image1, image2, image3, image4];
+    const images = [image1, image2, image3, image4].filter(
+      (item) => item !== undefined
+    );
 
     // checking for all data to add product
     if (
@@ -34,8 +35,7 @@ const addProduct = async (req, res) => {
       !category ||
       !subCategory ||
       !sizes ||
-      !bestseller ||
-      !date
+      !bestseller
     ) {
       return res.json({ success: false, message: "Missing Details" });
     }
@@ -46,14 +46,14 @@ const addProduct = async (req, res) => {
     // });
     // const imageUrl = imageUpload.secure_url;
 
-    let imageUrl = await Promise.all(
-      images.map(async (item) => {
-        let result = await cloudinary.uploader.upload(item.path, {
-          resource_type: "image",
-        });
-        return result.secure_url;
-      })
-    );
+    // let imageUrl = await Promise.all(
+    //   images.map(async (item) => {
+    //     let result = await cloudinary.uploader.upload(item.path, {
+    //       resource_type: "image",
+    //     });
+    //     return result.secure_url;
+    //   })
+    // );
 
     console.log(
       name,
@@ -62,31 +62,30 @@ const addProduct = async (req, res) => {
       category,
       subCategory,
       sizes,
-      bestseller,
-      date
+      bestseller
     );
-    console.log(images);
-    console.log(imageUrl);
+    // console.log(images);
+    // console.log(imageUrl);
 
     // validating email format
-    if (!validator.isEmail(email)) {
-      return res.json({
-        success: false,
-        message: "Please enter a valid email",
-      });
-    }
+    // if (!validator.isEmail(email)) {
+    //   return res.json({
+    //     success: false,
+    //     message: "Please enter a valid email",
+    //   });
+    // }
 
     // validating strong password
-    if (password.length < 8) {
-      return res.json({
-        success: false,
-        message: "Please enter a strong password",
-      });
-    }
+    // if (password.length < 8) {
+    //   return res.json({
+    //     success: false,
+    //     message: "Please enter a strong password",
+    //   });
+    // }
 
     // hashing doctor password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(password, salt);
 
     const productData = {
       name,
@@ -95,7 +94,7 @@ const addProduct = async (req, res) => {
       category,
       subCategory,
       bestseller: bestseller === "true" ? true : false,
-      image: imageUrl,
+      // image: imageUrl,
       sizes: JSON.parse(sizes),
       date: Date.now(),
     };
@@ -114,8 +113,8 @@ const addProduct = async (req, res) => {
 // API for listing product
 const listProduct = async (req, res) => {
   try {
-    const doctors = await doctorModel.find({}).select(["-password", "-email"]);
-    res.json({ success: true, doctors });
+    const products = await productModel.find({});
+    res.json({ success: true, products });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -123,9 +122,31 @@ const listProduct = async (req, res) => {
 };
 
 // API for removing product
-const removeProduct = async (req, res) => {};
+const removeProduct = async (req, res) => {
+  try {
+    await productModel.findByIdAndDelete(req.body.id);
+    res.json({ success: true, message: "Product Removed" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 // API for single product info
-const singleProduct = async (req, res) => {};
+const singleProduct = async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const product = await productModel.findById(productId);
+
+    if (!product) {
+      return res.json({ success: false, message: "Product not avilable" });
+    }
+
+    res.json({ success: true, product });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 export { addProduct, listProduct, removeProduct, singleProduct };
