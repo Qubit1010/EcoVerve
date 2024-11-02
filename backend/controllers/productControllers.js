@@ -46,14 +46,14 @@ const addProduct = async (req, res) => {
     // });
     // const imageUrl = imageUpload.secure_url;
 
-    // let imageUrl = await Promise.all(
-    //   images.map(async (item) => {
-    //     let result = await cloudinary.uploader.upload(item.path, {
-    //       resource_type: "image",
-    //     });
-    //     return result.secure_url;
-    //   })
-    // );
+    let imageUrl = await Promise.all(
+      images.map(async (item) => {
+        let result = await cloudinary.uploader.upload(item.path, {
+          resource_type: "image",
+        });
+        return result.secure_url;
+      })
+    );
 
     console.log(
       name,
@@ -67,26 +67,6 @@ const addProduct = async (req, res) => {
     // console.log(images);
     // console.log(imageUrl);
 
-    // validating email format
-    // if (!validator.isEmail(email)) {
-    //   return res.json({
-    //     success: false,
-    //     message: "Please enter a valid email",
-    //   });
-    // }
-
-    // validating strong password
-    // if (password.length < 8) {
-    //   return res.json({
-    //     success: false,
-    //     message: "Please enter a strong password",
-    //   });
-    // }
-
-    // hashing doctor password
-    // const salt = await bcrypt.genSalt(10);
-    // const hashedPassword = await bcrypt.hash(password, salt);
-
     const productData = {
       name,
       description,
@@ -94,7 +74,7 @@ const addProduct = async (req, res) => {
       category,
       subCategory,
       bestseller: bestseller === "true" ? true : false,
-      // image: imageUrl,
+      image: imageUrl,
       sizes: JSON.parse(sizes),
       date: Date.now(),
     };
