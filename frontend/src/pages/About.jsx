@@ -17,28 +17,25 @@ const About = () => {
         />
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600">
           <p>
-            Radiance Clinic is a leading U.S.-based healthcare facility
-            dedicated to providing exceptional patient care through cutting-edge
-            techniques and state-of-the-art medical technology. Our team of
-            highly qualified doctors is committed to delivering personalized
-            treatment, ensuring the highest standards of safety and
-            effectiveness.
+            EcoVerse was born out of a passion for innovation and a desire to
+            revolutionize the way people shop online. Our journey began with a
+            simple idea: to provide a platform where customers can easily
+            discover, explore, and purchase a wide range of products from the
+            comfort of their homes.
           </p>
           <p>
-            At Radiance, we prioritize patient well-being and comfort, offering
-            a compassionate approach that combines innovation with expertise for
-            outstanding healthcare outcomes.
+            Since our inception, we've worked tirelessly to curate a diverse
+            selection of high-quality products that cater to every taste and
+            preference. From fashion and beauty to electronics and home
+            essentials, we offer an extensive collection sourced from trusted
+            brands and suppliers.
           </p>
           <b className="text-gray-800">Our Mission</b>
           <p>
-            At Radiance Clinic, our vision is to redefine healthcare by setting
-            a new standard for patient-centered care and clinical excellence. We
-            aim to be a beacon of hope and healing, where advanced medical
-            techniques and compassionate service come together to enhance the
-            quality of life for every individual. We strive to continuously
-            innovate, empowering our highly qualified doctors to deliver the
-            best possible outcomes while building lasting trust and confidence
-            with our patients.
+            Our mission at EcoVerse is to empower customers with choice,
+            convenience, and confidence. We're dedicated to providing a seamless
+            shopping experience that exceeds expectations, from browsing and
+            ordering to delivery and beyond.
           </p>
         </div>
       </div>

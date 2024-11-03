@@ -22,7 +22,7 @@ const Contact = () => {
             54709 Willms <br /> Station Suite 350, Washington, USA
           </p>
           <p className="text-gray-500">
-            Tel: (415) 555‑0132 <br /> Email: radiance@gmail.com
+            Tel: (415) 555‑0132 <br /> Email: ecoverse@gmail.com
           </p>
           <p className="font-semibold text-lg text-gray-600">
             Careers at EcoVerse
