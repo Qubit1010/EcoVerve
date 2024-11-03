@@ -19,7 +19,7 @@ connectCloudinary();
 const corsOptions = {
   origin: [
     "https://ecoverve-admin.vercel.app",
-    "https://ecoverve-frontend.vercel.app/",
+    "https://ecoverve-frontend.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
