@@ -26,7 +26,7 @@ const App = () => {
       <ToastContainer />
       {atoken === "" ? (
         <Login setToken={setAToken} />
-      ) : (
+      ) : (  
         <>
           <NavBar setToken={setAToken} />
           <hr />
