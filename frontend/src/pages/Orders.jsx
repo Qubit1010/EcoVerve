@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ShopContext } from "../context/shopContext";
+import { ShopContext } from "../context/ShopContext2";
 import Title from "../components/Title";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -19,7 +19,7 @@ const Orders = () => {
         {},
         { headers: { token } }
       );
-      
+
       // orders data formating
       if (response.data.success) {
         setorderData(response.data.products);

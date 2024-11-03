@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ShopContext } from "../context/shopContext";
+import { ShopContext } from "../context/ShopContext2";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
