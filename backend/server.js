@@ -15,8 +15,14 @@ connectDB();
 connectCloudinary();
 
 // middlewares
+// allow specific origin
+const corsOptions = {
+  origin: "https://ecoverve-admin.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // api endpoints
 app.use("/api/user", userRouter);
